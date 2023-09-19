@@ -45,4 +45,18 @@ class CountryRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findOrCreateByName(string $name): Country
+    {
+        $country = $this->findOneBy(['name' => $name]);
+
+        if (!$country) {
+            $country = new Country();
+            $country->setName($name);
+            $this->_em->persist($country);
+            $this->_em->flush();
+        }
+
+        return $country;
+    }
 }

@@ -45,4 +45,18 @@ class BandRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findOrCreateByName(string $name): Band
+    {
+        $band = $this->findOneBy(['name' => $name]);
+
+        if (!$band) {
+            $band = new Band();
+            $band->setName($name);
+            $this->_em->persist($band);
+            $this->_em->flush();
+        }
+
+        return $band;
+    }
 }

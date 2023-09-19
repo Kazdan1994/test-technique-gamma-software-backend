@@ -2,6 +2,8 @@
 
 namespace App\Tests\Controller;
 
+use Doctrine\ORM\Tools\SchemaTool;
+use Doctrine\ORM\Tools\ToolsException;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -22,7 +24,7 @@ class ExcelUploadControllerTest extends WebTestCase
         );
 
         // Send a POST request to your API endpoint
-        $client->request('POST', '/api/upload-excel', [], ['excelFile' => $excelFile]);
+        $client->request('POST', '/api/excel/upload', [], ['excelFile' => $excelFile]);
 
         // Check the response status code
         $this->assertSame(200, $client->getResponse()->getStatusCode());

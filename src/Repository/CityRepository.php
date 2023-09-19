@@ -45,4 +45,18 @@ class CityRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findOrCreateByName(string $name): City
+    {
+        $city = $this->findOneBy(['name' => $name]);
+
+        if (!$city) {
+            $city = new City();
+            $city->setName($name);
+            $this->_em->persist($city);
+            $this->_em->flush();
+        }
+
+        return $city;
+    }
 }

@@ -12,6 +12,12 @@
         <server name="SHELL_VERBOSITY" value="-1" />
         <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
         <server name="SYMFONY_PHPUNIT_VERSION" value="9.5" />
+        <server name="KERNEL_CLASS" value="App\Kernel" />
+        <server name="DATABASE_URL_TEST" value="sqlite:///:memory:" />
+        <env name="SYMFONY_DOTENV_VARS" value="DATABASE_URL_TEST" />
+        <env name="RECREATE_DATABASE" value="true" />
+        <env name="KERNEL_CLASS" value="App\Kernel" />
+        <env name="SYMFONY_ENV" value="test" />
     </php>
 
     <testsuites>
@@ -31,5 +37,6 @@
     </listeners>
 
     <extensions>
+        <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension" />
     </extensions>
 </phpunit>
